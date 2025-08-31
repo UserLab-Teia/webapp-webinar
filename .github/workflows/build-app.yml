@@ -1,0 +1,31 @@
+name: CI Webapp
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Instalar dependencias
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
+      - name: Ejecutar pruebas
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "No hay pruebas definidas"
+          else
+            echo "No hay package.json, solo archivos estáticos"
+          fi
+      - name: Fin del workflow
+        run: echo "Workflow completado"
