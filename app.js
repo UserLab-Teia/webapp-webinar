@@ -15,6 +15,17 @@ window.addEventListener('DOMContentLoaded', function () {
             edad: parseInt(document.getElementById('edad').value, 10),
             genero: document.getElementById('genero').value
         };
+            const regexSoloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            if (!regexSoloLetras.test(usuario.nombre)) {
+                resultado.textContent = 'El nombre no debe contener números.';
+                resultado.style.color = 'red';
+                return;
+            }
+            if (!regexSoloLetras.test(usuario.apellidoPaterno)) {
+                resultado.textContent = 'El apellido paterno no debe contener números.';
+                resultado.style.color = 'red';
+                return;
+            }
         if (!usuario.nombre || !usuario.apellidoPaterno || isNaN(usuario.edad) || !usuario.genero) {
             resultado.textContent = 'Por favor, complete todos los campos correctamente.';
             resultado.style.color = 'red';
